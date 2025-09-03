@@ -1,7 +1,25 @@
-import { SquareArrowOutUpLeft } from "lucide-react";
-import Image from "next/image";
+"use client";
+
+type DailyFact = {
+  fact: {
+    fact: string;
+  };
+};
+
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [dailyFact, setDailyFact] = useState<DailyFact>();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch("/api/daily_fact").then((response) =>
+      response.json().then((dailyFact: DailyFact) => {
+        setDailyFact(dailyFact);
+        setLoading(false);
+      })
+    );
+  }, []);
+  console.log(dailyFact);
   return (
     <div className="min-h-screen bg-base-100">
       <div className="navbar bg-base-200 shadow-sm p-4">
@@ -27,27 +45,13 @@ export default function Home() {
         </div>
       </div>
       <div className="hero min-h-[80vh]">
-        <div className="hero-content flex-col lg:flex-row">
-          <Image
-            height={848}
-            width={471}
-            src="/visuel_question.png"
-            alt="visuel d'une question du bot"
-            className="max-w-md rounded-lg shadow-2xl"
-          />
+        <div className="hero-content text-center">
           <div className="max-w-xl">
             <h1 className="text-5xl font-bold">Dites bonjour à Freudy !</h1>
             <p className="py-6 text-lg text-base-content/70">
               Freudy est un bot discord qui propose un quiz de 100 questions et
               des anecdotes journalières basées sur la pyschologie !
             </p>
-            <a
-              className="btn btn-primary mt-4"
-              href="https://discord.com/oauth2/authorize?client_id=1323335981314867252"
-            >
-              <SquareArrowOutUpLeft className="size-[1.2em]" />
-              Ajouter
-            </a>
           </div>
         </div>
       </div>
@@ -65,7 +69,17 @@ export default function Home() {
           <div className="card card-lg shadow-lg bg-base-200">
             <div className="card-body">
               <h2 className="card-title">Anecdotes Journalières</h2>
-              <p>Chaque jour, une anecdote sur le thème de la psychologie</p>
+              <p>
+                Chaque jour, une anecdote sur le thème de la psychologie comme
+                celle ci !
+              </p>
+              {loading ? (
+                <span className="loading loading-spinner loading-xs"></span>
+              ) : (
+                <span className="bg-accent text-accent-content p-4 rounded-lg mt-4 italic">
+                  {dailyFact?.fact.fact}
+                </span>
+              )}
             </div>
           </div>
           <div className="card card-lg shadow-lg bg-base-200">
