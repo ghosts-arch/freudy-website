@@ -6,10 +6,18 @@ type DailyFact = {
   };
 };
 
+type Question = {
+  question: {
+    question: string;
+    answers: [{ text: string; id: number }];
+  };
+};
+
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [dailyFact, setDailyFact] = useState<DailyFact>();
+  const [question, setQuestion] = useState<Question>();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("/api/daily_fact").then((response) =>
@@ -18,6 +26,11 @@ export default function Home() {
         setLoading(false);
       })
     );
+    fetch("api/question").then((response) => {
+      response.json().then((question: Question) => {
+        setQuestion(question);
+      });
+    });
   }, []);
   return (
     <div className="min-h-screen bg-base-100">
