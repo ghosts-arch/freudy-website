@@ -49,7 +49,7 @@ export default function Home() {
             <h1 className="text-5xl font-bold">Dites bonjour à Freudy !</h1>
             <p className="py-6 text-lg text-base-content/70">
               Freudy est un bot discord qui propose un quiz de 100 questions et
-              des anecdotes journalières basées sur la pyschologie !
+              des anecdotes journalières basées sur la psychologie !
             </p>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function Home() {
           </div>
           <div className="card card-lg shadow-lg bg-base-200">
             <div className="card-body">
-              <h2 className="card-title">Systeme de niveau (comming soon)</h2>
+              <h2 className="card-title">Systeme de niveau (coming soon)</h2>
               <p>
                 Une histoire ou le joueur est un étudiant qui devra devenir le
                 meilleur grace aux enseignements de Freudy !
