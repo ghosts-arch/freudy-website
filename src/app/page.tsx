@@ -19,7 +19,6 @@ export default function Home() {
       })
     );
   }, []);
-  console.log(dailyFact);
   return (
     <div className="min-h-screen bg-base-100">
       <div className="navbar bg-base-200 shadow-sm p-4">
