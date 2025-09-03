@@ -5,6 +5,7 @@ export async function GET() {
       cache: "no-cache",
     }
   );
+  console.log(await response.text());
   if (!response.ok) {
     return new Response(
       JSON.stringify({ error: "Failed to fetch daily fact" })
