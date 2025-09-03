@@ -1,6 +1,7 @@
 export async function GET() {
+  console.log();
   const response = await fetch(
-    `http://${process.env.NEXT_API_IP}:${process.env.NEXT_API_PORT}/daily_fact}`,
+    `http://${process.env.NEXT_API_IP}:${process.env.NEXT_API_PORT}/daily_fact`,
     {
       cache: "no-cache",
     }
