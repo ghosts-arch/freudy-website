@@ -1,16 +1,32 @@
 "use client";
 
 type DailyFact = {
-  fact: {
+  dailyFact: {
     fact: string;
   };
 };
 
+type Answer = {
+  text: string;
+  id: number;
+  isValidAnswer: boolean;
+};
+
+type Question = {
+  question: string;
+  explanation: string;
+  answers: Answer[];
+};
+
+import Footer from "@/components/footer";
+import QuizPlayground from "@/components/quizPlayground";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [dailyFact, setDailyFact] = useState<DailyFact>();
+  const [question, setQuestion] = useState<Question>();
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetch("/api/daily_fact").then((response) =>
       response.json().then((dailyFact: DailyFact) => {
@@ -18,7 +34,15 @@ export default function Home() {
         setLoading(false);
       })
     );
+    fetch("api/question").then((response) => {
+      response.json().then((question: Question) => {
+        setQuestion(question);
+      });
+    });
   }, []);
+
+  if (!question) return;
+
   return (
     <div className="min-h-screen bg-base-100">
       <div className="navbar bg-base-200 shadow-sm p-4">
@@ -51,9 +75,13 @@ export default function Home() {
               Freudy est un bot discord qui propose un quiz de 100 questions et
               des anecdotes journalières basées sur la psychologie !
             </p>
+            <a href="#playground" className="btn btn-primary">
+              Essayer
+            </a>
           </div>
         </div>
       </div>
+      <QuizPlayground question={question} />
       <div className="py-20">
         <h2 className="text-center text-3xl card-lg font-bold mb-10">
           Fonctionalités
@@ -76,7 +104,7 @@ export default function Home() {
                 <span className="loading loading-spinner loading-xs"></span>
               ) : (
                 <span className="bg-accent text-accent-content p-4 rounded-lg mt-4 italic">
-                  {dailyFact?.fact.fact}
+                  {dailyFact?.dailyFact.fact}
                 </span>
               )}
             </div>
@@ -92,11 +120,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-8">
-        <aside>
-          <p>Site crée par _blue_angels</p>
-        </aside>
-      </footer>
+      <Footer />
     </div>
   );
 }
