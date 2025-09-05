@@ -51,7 +51,7 @@ export default function QuizPlayground({ question }: QuizPlayGroundProps) {
             : "text-red-500"
         }`}
       >
-        {answerResult === AnswerResult.Incorrect
+        {answerResult === AnswerResult.Correct
           ? "Bonne réponse"
           : "Mauvaise réponse "}
       </h3>
