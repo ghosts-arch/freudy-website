@@ -27,10 +27,10 @@ export default function QuizPlayground({ question }: QuizPlayGroundProps) {
       className="container mx-auto text-center bg-base-200 py-16 px-6"
     >
       <h3 className="text-lg mb-4">{question.question}</h3>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         {question?.answers.map((answer) => (
           <button
-            className="btn btn-primary rounded-lg"
+            className="btn btn-primary py-8"
             key={answer.id}
             onClick={() => handleClick(answer)}
           >
