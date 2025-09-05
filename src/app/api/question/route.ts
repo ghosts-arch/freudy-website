@@ -8,8 +8,5 @@ export async function GET() {
     return new Response(JSON.stringify({ error: "Failed to fetch question" }));
   }
   const data = await response.json();
-  return NextResponse.json(data, { status: 200 });
-  return new Response(JSON.stringify(data), {
-    headers: { "Content-Type": "application/json" },
-  });
+  return NextResponse.json(data.question, { status: 200 });
 }
