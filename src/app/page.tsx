@@ -45,7 +45,8 @@ export default function Home() {
   if (!question) return;
 
   return (
-    <>
+    <div className="min-h-screen bg-base-100">
+      <Navbar />
       <div className="hero min-h-[80vh]">
         <div className="hero-content text-center">
           <div className="max-w-xl">
@@ -99,6 +100,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }

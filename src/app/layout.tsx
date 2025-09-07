@@ -16,13 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="business">
-      <body>
-        <div className="min-h-screen bg-base-100">
-          <Navbar />
-          {children}
-          <Footer />
-        </div>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
