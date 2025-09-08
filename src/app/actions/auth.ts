@@ -7,5 +7,5 @@ export async function signInDiscord() {
 }
 
 export async function signOutUser() {
-  await signOut();
+  await signOut({ redirectTo: "/" });
 }
