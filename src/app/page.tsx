@@ -18,8 +18,6 @@ type Question = {
   answers: Answer[];
 };
 
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
 import QuizPlayground from "@/components/quizPlayground";
 import { useEffect, useState } from "react";
 
