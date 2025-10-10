@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Answer, Question } from "../../types/Question";
+import { Answer, Question } from "../../types/types";
 
 enum AnswerResult {
   NotAnswered,

@@ -1,11 +1,14 @@
-import { signOutUser } from "@/app/actions/auth";
+"use client";
+
+import { signOut } from "next-auth/react";
 
 export function SignOut() {
   return (
-    <form action={signOutUser}>
-      <button type="submit" className="btn btn-error rounded-full">
-        Deconnexion
-      </button>
-    </form>
+    <button
+      onClick={() => signOut({ callbackUrl: "/" })}
+      className="text-error hover:underline"
+    >
+      Deconnexion
+    </button>
   );
 }

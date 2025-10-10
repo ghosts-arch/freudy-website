@@ -18,13 +18,18 @@ type Question = {
   answers: Answer[];
 };
 
+import { signOut } from "@/auth";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import QuizPlayground from "@/components/quizPlayground";
 import { SignIn } from "@/components/signIn";
+import { SignOut } from "@/components/signOut";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+  const { data: session, status } = useSession();
   const [dailyFact, setDailyFact] = useState<DailyFact>();
   const [question, setQuestion] = useState<Question>();
   const [loading, setLoading] = useState(true);
@@ -37,9 +42,39 @@ export default function Home() {
       })
     );
     fetch("api/question").then((response) => {
-      response.json().then((question: Question) => {
-        setQuestion(question);
-      });
+      response
+        .json()
+        .then((question: Question) => {
+          setQuestion(question);
+        })
+        .catch(() => {
+          setQuestion({
+            question: "random question",
+            explanation: "random question",
+            answers: [
+              {
+                text: "reponse 1",
+                isValidAnswer: true,
+                id: 0,
+              },
+              {
+                text: "reponse 2",
+                isValidAnswer: true,
+                id: 0,
+              },
+              {
+                text: "reponse 3",
+                isValidAnswer: true,
+                id: 0,
+              },
+              {
+                text: "reponse 4",
+                isValidAnswer: true,
+                id: 0,
+              },
+            ],
+          });
+        });
     });
   }, []);
 
@@ -57,7 +92,17 @@ export default function Home() {
               des anecdotes journalières basées sur la psychologie !
             </p>
             <div className="flex gap-2 items-center justify-center">
-              <SignIn />
+              {!session ? (
+                <SignIn></SignIn>
+              ) : (
+                <Link
+                  href="dashboard"
+                  className="btn btn-primary btn-md rounded-full"
+                >
+                  Mon espace
+                </Link>
+              )}
+
               <a
                 className="btn bg-black text-white border-black rounded-full btn-md"
                 href="https://github.com/ghosts-arch/Freudy"
@@ -77,7 +122,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <QuizPlayground question={question} />
+
       <div className="py-20">
         <h2 className="text-center text-3xl card-lg font-bold mb-10">
           Fonctionalités

@@ -15,3 +15,9 @@ export type Question = {
   explanation: string;
   answers: Answer[];
 };
+
+export type Guild = {
+  id: string;
+  name: string;
+  owner: boolean;
+};
